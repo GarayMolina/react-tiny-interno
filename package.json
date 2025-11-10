@@ -1,6 +1,6 @@
 {
 	"name": "react-tiny-editor-word-garaymolina",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Editor WYSIWYG tipo Word para React - Sin dependencias externas ni API keys",
 	"main": "src/index.js",
 	"scripts": {
