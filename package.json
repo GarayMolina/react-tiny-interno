@@ -1,5 +1,5 @@
 {
-	"name": "react-tiny-editor-word-garaymolina",
+	"name": "react-tiny-editor-word",
 	"version": "1.0.2",
 	"description": "Editor WYSIWYG tipo Word para React - Sin dependencias externas ni API keys",
 	"main": "src/index.js",
