@@ -1,5 +1,5 @@
 {
-	"name": "react-tiny-editor-word",
+	"name": "@garaymolina/react-tiny-editor-word",
 	"version": "1.0.0",
 	"description": "Editor WYSIWYG tipo Word para React - Sin dependencias externas ni API keys",
 	"main": "src/index.js",
@@ -17,7 +17,7 @@
 		"rich-text",
 		"what-you-see-is-what-you-get"
 	],
-	"author": "Tu Nombre",
+	"author": "GarayMolina",
 	"license": "MIT",
 	"peerDependencies": {
 		"react": ">=16.8.0",
@@ -27,7 +27,10 @@
 		"type": "git",
 		"url": "https://github.com/GarayMolina/react-tiny-interno.git"
 	},
-	"homepage": "https://github.com/GarayMolina/react-tiny-interno.git#readme",
+	"homepage": "https://github.com/GarayMolina/react-tiny-interno#readme",
+	"bugs": {
+		"url": "https://github.com/GarayMolina/react-tiny-interno/issues"
+	},
 	"files": [
 		"src"
 	]
