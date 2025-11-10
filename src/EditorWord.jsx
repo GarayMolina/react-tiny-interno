@@ -13,7 +13,7 @@ const EditorWord = ({ value, handleChange }) => {
 
     // Tamaño máximo de imágenes
     const MAX_ANCHO = 1078
-    const MAX_ALTO = 607
+    const MAX_ALTO = 684
 
     useEffect(() => {
         if (editorRef.current) {
@@ -59,6 +59,7 @@ const EditorWord = ({ value, handleChange }) => {
     }, [])
 
     const redimensionarImagen = (img, ancho, alto) => {
+        // Aplicar límites máximos al redimensionar
         const nuevoAncho = Math.min(ancho, MAX_ANCHO)
         const nuevoAlto = Math.min(alto, MAX_ALTO)
 
@@ -91,6 +92,7 @@ const EditorWord = ({ value, handleChange }) => {
                 const anchoOriginal = this.width
                 const altoOriginal = this.height
 
+                // Calcular tamaño manteniendo proporción y respetando límites máximos
                 let anchoFinal = anchoOriginal
                 let altoFinal = altoOriginal
 
@@ -105,11 +107,11 @@ const EditorWord = ({ value, handleChange }) => {
                 }
 
                 const imgHTML = `
-          <img src="${evento.target.result}" 
-               style="width: ${anchoFinal}px; height: ${altoFinal}px; border: 2px solid transparent; border-radius: 4px; margin: 10px 0; cursor: pointer;" 
-               data-original-width="${anchoOriginal}"
-               data-original-height="${altoOriginal}" />
-        `
+                    <img src="${evento.target.result}" 
+                        style="width: ${anchoFinal}px; height: ${altoFinal}px; border: 2px solid transparent; border-radius: 4px; margin: 10px 0; cursor: pointer;" 
+                        data-original-width="${anchoOriginal}"
+                        data-original-height="${altoOriginal}" />
+                    `
                 aplicarFormato('insertHTML', imgHTML)
             }
             img.src = evento.target.result
@@ -159,7 +161,7 @@ const EditorWord = ({ value, handleChange }) => {
 
     return (
         <div style={{
-            maxWidth: '1000px',
+            maxWidth: '100%',
             margin: '0 auto',
             background: 'white',
             borderRadius: '10px',
@@ -190,6 +192,7 @@ const EditorWord = ({ value, handleChange }) => {
                     </select>
 
                     <button
+                        title='Letras en negritas'
                         type="button"
                         onClick={() => aplicarFormato('bold')}
                         style={{
@@ -206,6 +209,7 @@ const EditorWord = ({ value, handleChange }) => {
                     </button>
 
                     <button
+                        title='Formato Italic'
                         type="button"
                         onClick={() => aplicarFormato('italic')}
                         style={{
@@ -222,6 +226,7 @@ const EditorWord = ({ value, handleChange }) => {
                     </button>
 
                     <button
+                        title='Formato underline'
                         type="button"
                         onClick={() => aplicarFormato('underline')}
                         style={{
@@ -237,31 +242,31 @@ const EditorWord = ({ value, handleChange }) => {
                         S
                     </button>
 
-                    <button type="button" onClick={() => aplicarFormato('justifyLeft')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Textos alineados desde el inicio del documento' type="button" onClick={() => aplicarFormato('justifyLeft')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         ⬅
                     </button>
 
-                    <button type="button" onClick={() => aplicarFormato('justifyCenter')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Textos alineados al centro del documento' type="button" onClick={() => aplicarFormato('justifyCenter')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         ⬌
                     </button>
 
-                    <button type="button" onClick={() => aplicarFormato('justifyRight')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Textos alineados al final del documento' type="button" onClick={() => aplicarFormato('justifyRight')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         ➡
                     </button>
 
-                    <button type="button" onClick={() => aplicarFormato('insertUnorderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Textos en formato listas con puntos' type="button" onClick={() => aplicarFormato('insertUnorderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         • Lista
                     </button>
 
-                    <button type="button" onClick={() => aplicarFormato('insertOrderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Textos en formato listas con numeros' type="button" onClick={() => aplicarFormato('insertOrderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         1. Lista
                     </button>
 
-                    <button type="button" onClick={insertarEnlace} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Adjuntar en texto link' type="button" onClick={insertarEnlace} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         🔗
                     </button>
 
-                    <button type="button" onClick={insertarImagen} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Adjunta imagen dentro del documento' type="button" onClick={insertarImagen} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         🖼️
                     </button>
 
@@ -273,16 +278,16 @@ const EditorWord = ({ value, handleChange }) => {
                         style={{ display: 'none' }}
                     />
 
-                    <button type="button" onClick={cambiarColor} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Enrriqueser texto con color personalizado' type="button" onClick={cambiarColor} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         🎨
                     </button>
 
-                    <button type="button" onClick={() => aplicarFormato('removeFormat')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                    <button title='Quitar formato al texto seleccionado' type="button" onClick={() => aplicarFormato('removeFormat')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         🧹
                     </button>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'white', padding: '5px 10px', borderRadius: '5px', border: '1px solid #ddd' }}>
+                {/* <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'white', padding: '5px 10px', borderRadius: '5px', border: '1px solid #ddd' }}>
                     <button
                         type="button"
                         onClick={disminuirZoom}
@@ -329,7 +334,7 @@ const EditorWord = ({ value, handleChange }) => {
                     >
                         🔄
                     </button>
-                </div>
+                </div> */}
             </div>
 
             <div style={{
@@ -352,7 +357,7 @@ const EditorWord = ({ value, handleChange }) => {
                         minHeight: '300px',
                         width: '90%',
                         maxWidth: '900px',
-                        padding: '40px',
+                        padding: '20px',
                         fontSize: '16px',
                         lineHeight: '1.6',
                         outline: 'none',
@@ -377,8 +382,7 @@ const EditorWord = ({ value, handleChange }) => {
         </div>
     )
 }
-
-// Componente interno para redimensionar imágenes
+// Componente ImageResizer CON LÍMITES MÁXIMOS
 const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
     const [tamano, setTamano] = useState({
         ancho: parseInt(imagen.style.width) || imagen.naturalWidth,
@@ -394,6 +398,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
         let nuevoAncho = tamano.ancho * factor
         let nuevoAlto = tamano.alto * factor
 
+        // Aplicar límites máximos
         if (nuevoAncho > maxAncho) {
             nuevoAncho = maxAncho
             nuevoAlto = (tamano.alto * maxAncho) / tamano.ancho
@@ -404,6 +409,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
             nuevoAncho = (tamano.ancho * maxAlto) / tamano.alto
         }
 
+        // Aplicar límites mínimos
         nuevoAncho = Math.max(50, nuevoAncho)
         nuevoAlto = Math.max(50, nuevoAlto)
 
@@ -415,6 +421,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
         const anchoOriginal = parseInt(imagen.getAttribute('data-original-width')) || imagen.naturalWidth
         const altoOriginal = parseInt(imagen.getAttribute('data-original-height')) || imagen.naturalHeight
 
+        // Aplicar límites máximos también al restaurar
         let anchoFinal = anchoOriginal
         let altoFinal = altoOriginal
 
@@ -467,6 +474,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
 
                 <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', margin: '15px 0' }}>
                     <button
+                        type='button'
                         onClick={(e) => manejarRedimension('increase', e)}
                         disabled={tamano.ancho >= maxAncho || tamano.alto >= maxAlto}
                         style={{
@@ -483,6 +491,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
                     <button
                         onClick={(e) => manejarRedimension('decrease', e)}
                         style={{ padding: '10px 15px', background: '#e74c3c', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+                        type='button'
                     >
                         ➖ Achicar
                     </button>
@@ -491,6 +500,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
                 <button
                     onClick={restaurarTamanoOriginal}
                     style={{ padding: '8px 12px', background: '#2ecc71', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', margin: '5px' }}
+                    type='button'
                 >
                     🔄 Tamaño óptimo
                 </button>
@@ -499,6 +509,7 @@ const ImageResizer = ({ imagen, onResize, onClose, maxAncho, maxAlto }) => {
                     <button
                         onClick={onClose}
                         style={{ padding: '8px 20px', background: '#95a5a6', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+                        type='button'
                     >
                         Cerrar
                     </button>
