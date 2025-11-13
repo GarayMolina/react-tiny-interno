@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 
-const EditorWord = ({ value, handleChange }) => {
+const EditorWord = ({ value, handleChange, isFormato = true, isImagenes = true, isColores = true, isAlineamiento = true, isURL = true, isListas = true }) => {
     const editorRef = useRef(null)
     const fileInputRef = useRef(null)
     const [formatosActivos, setFormatosActivos] = useState({
@@ -181,106 +181,137 @@ const EditorWord = ({ value, handleChange }) => {
                 justifyContent: 'space-between'
             }}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
-                    <select
-                        onChange={(e) => aplicarFormato('formatBlock', e.target.value)}
-                        style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-                    >
-                        <option value="p">Normal</option>
-                        <option value="h1">Título 1</option>
-                        <option value="h2">Título 2</option>
-                        <option value="h3">Título 3</option>
-                    </select>
+                    {
+                        isFormato && (
+                            <>
 
-                    <button
-                        title='Letras en negritas'
-                        type="button"
-                        onClick={() => aplicarFormato('bold')}
-                        style={{
-                            padding: '8px 12px',
-                            border: '1px solid #ccc',
-                            background: formatosActivos.bold ? '#3498db' : 'white',
-                            color: formatosActivos.bold ? 'white' : 'black',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            fontWeight: 'bold'
-                        }}
-                    >
-                        N
-                    </button>
+                                <select
+                                    onChange={(e) => aplicarFormato('formatBlock', e.target.value)}
+                                    style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+                                >
+                                    <option value="p">Normal</option>
+                                    <option value="h1">Título 1</option>
+                                    <option value="h2">Título 2</option>
+                                    <option value="h3">Título 3</option>
+                                </select>
 
-                    <button
-                        title='Formato Italic'
-                        type="button"
-                        onClick={() => aplicarFormato('italic')}
-                        style={{
-                            padding: '8px 12px',
-                            border: '1px solid #ccc',
-                            background: formatosActivos.italic ? '#3498db' : 'white',
-                            color: formatosActivos.italic ? 'white' : 'black',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            fontStyle: 'italic'
-                        }}
-                    >
-                        K
-                    </button>
+                                <button
+                                    title='Letras en negritas'
+                                    type="button"
+                                    onClick={() => aplicarFormato('bold')}
+                                    style={{
+                                        padding: '8px 12px',
+                                        border: '1px solid #ccc',
+                                        background: formatosActivos.bold ? '#3498db' : 'white',
+                                        color: formatosActivos.bold ? 'white' : 'black',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontWeight: 'bold'
+                                    }}
+                                >
+                                    N
+                                </button>
 
-                    <button
-                        title='Formato underline'
-                        type="button"
-                        onClick={() => aplicarFormato('underline')}
-                        style={{
-                            padding: '8px 12px',
-                            border: '1px solid #ccc',
-                            background: formatosActivos.underline ? '#3498db' : 'white',
-                            color: formatosActivos.underline ? 'white' : 'black',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            textDecoration: 'underline'
-                        }}
-                    >
-                        S
-                    </button>
+                                <button
+                                    title='Formato Italic'
+                                    type="button"
+                                    onClick={() => aplicarFormato('italic')}
+                                    style={{
+                                        padding: '8px 12px',
+                                        border: '1px solid #ccc',
+                                        background: formatosActivos.italic ? '#3498db' : 'white',
+                                        color: formatosActivos.italic ? 'white' : 'black',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontStyle: 'italic'
+                                    }}
+                                >
+                                    K
+                                </button>
 
-                    <button title='Textos alineados desde el inicio del documento' type="button" onClick={() => aplicarFormato('justifyLeft')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        ⬅
-                    </button>
+                                <button
+                                    title='Formato underline'
+                                    type="button"
+                                    onClick={() => aplicarFormato('underline')}
+                                    style={{
+                                        padding: '8px 12px',
+                                        border: '1px solid #ccc',
+                                        background: formatosActivos.underline ? '#3498db' : 'white',
+                                        color: formatosActivos.underline ? 'white' : 'black',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        textDecoration: 'underline'
+                                    }}
+                                >
+                                    S
+                                </button>
+                            </>
+                        )
+                    }
+                    {
+                        isAlineamiento && (
+                            <>
+                                <button title='Textos alineados desde el inicio del documento' type="button" onClick={() => aplicarFormato('justifyLeft')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    ⬅
+                                </button>
 
-                    <button title='Textos alineados al centro del documento' type="button" onClick={() => aplicarFormato('justifyCenter')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        ⬌
-                    </button>
+                                <button title='Textos alineados al centro del documento' type="button" onClick={() => aplicarFormato('justifyCenter')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    ⬌
+                                </button>
 
-                    <button title='Textos alineados al final del documento' type="button" onClick={() => aplicarFormato('justifyRight')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        ➡
-                    </button>
+                                <button title='Textos alineados al final del documento' type="button" onClick={() => aplicarFormato('justifyRight')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    ➡
+                                </button>
+                            </>
+                        )
+                    }
+                    {
+                        isListas && (
+                            <>
+                                <button title='Textos en formato listas con puntos' type="button" onClick={() => aplicarFormato('insertUnorderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    • Lista
+                                </button>
 
-                    <button title='Textos en formato listas con puntos' type="button" onClick={() => aplicarFormato('insertUnorderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        • Lista
-                    </button>
-
-                    <button title='Textos en formato listas con numeros' type="button" onClick={() => aplicarFormato('insertOrderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        1. Lista
-                    </button>
-
-                    <button title='Adjuntar en texto link' type="button" onClick={insertarEnlace} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        🔗
-                    </button>
-
-                    <button title='Adjunta imagen dentro del documento' type="button" onClick={insertarImagen} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        🖼️
-                    </button>
-
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={manejarImagen}
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                    />
-
-                    <button title='Enrriqueser texto con color personalizado' type="button" onClick={cambiarColor} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
-                        🎨
-                    </button>
+                                <button title='Textos en formato listas con numeros' type="button" onClick={() => aplicarFormato('insertOrderedList')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    1. Lista
+                                </button>
+                            </>
+                        )
+                    }
+                    {
+                        isURL && (
+                            <>
+                                <button title='Adjuntar en texto link' type="button" onClick={insertarEnlace} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    🔗
+                                </button>
+                            </>
+                        )
+                    }
+                    {
+                        isImagenes && (
+                            <>
+                                <button title='Adjunta imagen dentro del documento' type="button" onClick={insertarImagen} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    🖼️
+                                </button>
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    onChange={manejarImagen}
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                />
+                            </>
+                        )
+                    }
+                    {
+                        isColores && (
+                            <>
+                                <button title='Enrriqueser texto con color personalizado' type="button" onClick={cambiarColor} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
+                                    🎨
+                                </button>
+                            </>
+                        )
+                    }
 
                     <button title='Quitar formato al texto seleccionado' type="button" onClick={() => aplicarFormato('removeFormat')} style={{ padding: '8px 12px', border: '1px solid #ccc', background: 'white', borderRadius: '4px', cursor: 'pointer' }}>
                         🧹
