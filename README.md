@@ -55,3 +55,10 @@ MIT - Libre para uso personal y comercial.
 
 ```bash
 npm install react-tiny-editor-word
+```
+
+## 💉 Importacion del componente
+
+```js
+import EditorWord from 'react-tiny-editor-word'
+```
